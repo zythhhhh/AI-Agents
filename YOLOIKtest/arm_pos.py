@@ -11,15 +11,8 @@ from lerobot.robots.so_follower import (
 )
 
 
-# ============================================================
-# USER SETTINGS
-# ============================================================
 
-# Change this to your follower's actual COM port
 PORT = "COM8"
-
-# IMPORTANT:
-# Use the SAME robot ID that you used when calibrating the follower.
 ROBOT_ID = "like_and_follow_er_arm"
 
 # Location of the SO101 URDF
@@ -29,8 +22,7 @@ URDF_PATH = (
     / "so101_new_calib.urdf"
 )
 
-# Desired gripper-tip XYZ position, in METERS,
-# relative to the robot's base coordinate system.
+# Desired gripper-tip XYZ position
 TARGET_X = 0.20
 TARGET_Y = 0.15
 TARGET_Z = 0.1
@@ -48,10 +40,6 @@ MAX_IK_ERROR = 0.01       # 1 cm
 MAX_JOINT_CHANGE = 90.0   # degrees
 
 
-# ============================================================
-# ARM JOINTS
-# ============================================================
-
 ARM_JOINTS = [
     "shoulder_pan",
     "shoulder_lift",
@@ -61,33 +49,11 @@ ARM_JOINTS = [
 ]
 
 
-# ============================================================
-# CREATE IKPY CHAIN
-# ============================================================
-
 def create_ik_chain():
-    """
-    Create an IKPy chain from the SO101 base to gripper_frame_link.
-    """
-
     if not URDF_PATH.exists():
         raise FileNotFoundError(
             f"URDF not found:\n{URDF_PATH}"
         )
-
-    # Force IKPy to follow:
-    #
-    # base
-    #   ↓
-    # shoulder_pan
-    # shoulder_lift
-    # elbow_flex
-    # wrist_flex
-    # wrist_roll
-    #   ↓
-    # gripper_frame_joint
-    #
-    # We specifically DO NOT include the moving gripper jaw.
 
     joint_path = ARM_JOINTS + ["gripper_frame_joint"]
 
@@ -96,14 +62,11 @@ def create_ik_chain():
         joint_path,
     )
 
-    # Load once so we can determine exactly where each joint
-    # appears in IKPy's chain.
     temp_chain = Chain.from_urdf_file(
         str(URDF_PATH),
         base_elements=base_elements,
     )
 
-    # Only the five arm joints should be adjustable by IK.
     active_mask = [
         link.name in ARM_JOINTS
         for link in temp_chain.links
@@ -124,17 +87,7 @@ def create_ik_chain():
     return chain
 
 
-# ============================================================
-# CURRENT JOINT STATE
-# ============================================================
-
 def get_current_arm_joints(robot):
-    """
-    Read the SO101 arm joint positions from LeRobot.
-
-    Returns:
-        NumPy array in DEGREES.
-    """
 
     observation = robot.get_observation()
 
@@ -149,20 +102,7 @@ def get_current_arm_joints(robot):
     return joints
 
 
-# ============================================================
-# CONVERT LEROBOT JOINTS -> IKPY VECTOR
-# ============================================================
-
 def joints_to_ik_vector(chain, joint_degrees):
-    """
-    Convert LeRobot joint angles (degrees) into IKPy's full
-    joint vector (radians).
-
-    If the calibrated robot reports an angle slightly outside
-    the generic URDF limits, clamp ONLY the IK solver's initial
-    guess to the allowed URDF range.
-    """
-
     values = np.zeros(len(chain.links))
 
     link_indices = {
@@ -179,10 +119,7 @@ def joints_to_ik_vector(chain, joint_degrees):
         raw_rad = np.deg2rad(angle_deg)
         value_rad = raw_rad
 
-        # IKPy stores URDF joint limits here
         lower, upper = chain.links[index].bounds
-
-        # Tiny margin so scipy starts INSIDE the limits
         epsilon = 1e-6
 
         if lower is not None:
@@ -197,7 +134,6 @@ def joints_to_ik_vector(chain, joint_degrees):
                 upper - epsilon,
             )
 
-        # Tell us if we had to clamp anything
         if not np.isclose(raw_rad, value_rad):
 
             print(
@@ -215,11 +151,6 @@ def joints_to_ik_vector(chain, joint_degrees):
     return values
 
 def ik_vector_to_joints(chain, solution):
-    """
-    Extract the five SO101 arm joints from the complete
-    IKPy solution and convert radians -> degrees.
-    """
-
     link_indices = {
         link.name: i
         for i, link in enumerate(chain.links)
@@ -236,11 +167,6 @@ def ik_vector_to_joints(chain, solution):
 
     return degrees
 
-
-# ============================================================
-# SMOOTH MOTION
-# ============================================================
-
 def move_joints_smoothly(
     robot,
     current_deg,
@@ -248,12 +174,6 @@ def move_joints_smoothly(
     duration=MOVE_DURATION,
     fps=FPS,
 ):
-    """
-    Smoothly interpolate from the current joint configuration
-    to the target configuration.
-
-    Uses smoothstep so velocity starts and ends gently.
-    """
 
     steps = max(1, int(duration * fps))
 
@@ -262,12 +182,6 @@ def move_joints_smoothly(
     for step in range(steps + 1):
 
         t = step / steps
-
-        # Smoothstep interpolation
-        #
-        # 0 -> gradually accelerate
-        # middle -> fastest
-        # 1 -> gradually decelerate
 
         alpha = 3 * t**2 - 2 * t**3
 
@@ -290,11 +204,6 @@ def move_joints_smoothly(
 
     print("Movement complete.")
 
-
-# ============================================================
-# MOVE GRIPPER TIP TO XYZ
-# ============================================================
-
 def move_xyz(
     robot,
     chain,
@@ -303,15 +212,6 @@ def move_xyz(
     z,
     duration=MOVE_DURATION,
 ):
-    """
-    Move the SO101 gripper tip to an XYZ coordinate.
-
-    XYZ is in meters relative to the SO101 URDF base frame.
-    """
-
-    # --------------------------------------------------------
-    # Read current arm position
-    # --------------------------------------------------------
 
     current_deg = get_current_arm_joints(robot)
 
@@ -323,18 +223,10 @@ def move_xyz(
     ):
         print(f"  {name:15s}: {angle:8.2f}°")
 
-    # --------------------------------------------------------
-    # Convert current robot state for IKPy
-    # --------------------------------------------------------
-
     initial_position = joints_to_ik_vector(
         chain,
         current_deg,
     )
-
-    # --------------------------------------------------------
-    # Calculate current XYZ
-    # --------------------------------------------------------
 
     current_pose = chain.forward_kinematics(
         initial_position
@@ -349,10 +241,6 @@ def move_xyz(
         f"  Z = {current_xyz[2]:.4f} m"
     )
 
-    # --------------------------------------------------------
-    # Target
-    # --------------------------------------------------------
-
     target_xyz = np.array(
         [x, y, z],
         dtype=float,
@@ -365,10 +253,6 @@ def move_xyz(
         f"  Z = {z:.4f} m"
     )
 
-    # --------------------------------------------------------
-    # INVERSE KINEMATICS
-    # --------------------------------------------------------
-
     solution = chain.inverse_kinematics(
         target_position=target_xyz,
         initial_position=initial_position,
@@ -379,9 +263,6 @@ def move_xyz(
         chain,
         solution,
     )
-    # --------------------------------------------------------
-    # Verify resulting XYZ using forward kinematics
-    # --------------------------------------------------------
 
     solved_pose = chain.forward_kinematics(
         solution
@@ -405,20 +286,12 @@ def move_xyz(
         f"{error * 1000:.2f} mm"
     )
 
-    # --------------------------------------------------------
-    # Safety check #1
-    # --------------------------------------------------------
-
     if error > MAX_IK_ERROR:
 
         raise RuntimeError(
             "IK could not accurately reach the requested "
             f"position.\nError = {error * 1000:.1f} mm"
         )
-
-    # --------------------------------------------------------
-    # Print calculated joint target
-    # --------------------------------------------------------
 
     print("\nTarget joint angles:")
 
@@ -427,10 +300,6 @@ def move_xyz(
         target_deg,
     ):
         print(f"  {name:15s}: {angle:8.2f}°")
-
-    # --------------------------------------------------------
-    # Safety check #2
-    # --------------------------------------------------------
 
     joint_changes = np.abs(
         target_deg - current_deg
@@ -453,10 +322,6 @@ def move_xyz(
             "Arm will NOT move."
         )
 
-    # --------------------------------------------------------
-    # ACTUALLY MOVE
-    # --------------------------------------------------------
-
     move_joints_smoothly(
         robot,
         current_deg,
@@ -465,32 +330,15 @@ def move_xyz(
     )
 
 def set_gripper(robot, position):
-    """
-    position:
-        0   = closed
-        100 = open
-    """
-
     position = max(0.0, min(100.0, position))
 
     robot.send_action({
         "gripper.pos": float(position)
     })
 
-# ============================================================
-# MAIN
-# ============================================================
-
 def main():
-    # --------------------------------------------------------
-    # Create IK solver
-    # --------------------------------------------------------
 
     chain = create_ik_chain()
-
-    # --------------------------------------------------------
-    # Configure SO101
-    # --------------------------------------------------------
 
     config = SO101FollowerConfig(
         port=PORT,
@@ -502,20 +350,12 @@ def main():
 
     try:
 
-        # ----------------------------------------------------
-        # Connect to physical arm
-        # ----------------------------------------------------
-
         print("\nConnecting to SO101...")
 
         robot.connect()
 
         print("SO101 connected.")
         set_gripper(robot, 40)
-        # ----------------------------------------------------
-        # GO TO XYZ
-        # ----------------------------------------------------
-
         move_xyz(
             robot,
             chain,
@@ -527,10 +367,6 @@ def main():
         set_gripper(robot, 20)
         time.sleep(2.0)
     finally:
-
-        # ----------------------------------------------------
-        # Always disconnect, even if IK fails
-        # ----------------------------------------------------
 
         if robot.is_connected:
             robot.disconnect()

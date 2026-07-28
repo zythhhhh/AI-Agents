@@ -2,10 +2,6 @@ import cv2
 from ultralytics import YOLOWorld
 
 
-# ---------------------------
-# YOLO setup
-# ---------------------------
-
 model = YOLOWorld("yolov8s-worldv2.pt")
 
 classes = [
