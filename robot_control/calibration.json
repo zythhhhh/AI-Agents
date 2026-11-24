@@ -176,11 +176,85 @@
     "arm3": {
         "gripper_present": true,
         "home": {},
-        "neutral": {},
+        "neutral": {
+            "2": 526,
+            "3": 509,
+            "4": 491,
+            "5": 519,
+            "6": 870
+        },
         "limits": {},
-        "direction": {},
-        "notes": "Smaller precision gripper; black platform.",
-        "active_servos": null,
-        "reference_photo": "IMG_4455.jpeg"
+        "direction": {
+            "1": "increasing closes",
+            "2": "increasing left (operator view)",
+            "3": "increasing forward",
+            "4": "increasing backward",
+            "5": "increasing forward",
+            "6": "increasing counterclockwise viewed from above"
+        },
+        "notes": "Smaller precision gripper; manually aligned before power connection by operator. Shared controller used individually. All six bidirectional movements observed. Gripper final readback 14 units below closed command; cause unverified. No safe home or limits established.",
+        "active_servos": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+        ],
+        "reference_photo": "IMG_4455.jpeg",
+        "initial_readings": {
+            "1": 637,
+            "2": 526,
+            "3": 509,
+            "4": 491,
+            "5": 519,
+            "6": 870
+        },
+        "neutral_offsets": {
+            "2": 26,
+            "3": 9,
+            "4": -9,
+            "5": 19,
+            "6": 370
+        },
+        "gripper_positions": {
+            "open": 437,
+            "closed": 637
+        },
+        "tested_command_ranges": {
+            "1": [
+                437,
+                637
+            ],
+            "2": [
+                476,
+                576
+            ],
+            "3": [
+                459,
+                559
+            ],
+            "4": [
+                441,
+                541
+            ],
+            "5": [
+                469,
+                569
+            ],
+            "6": [
+                820,
+                920
+            ]
+        },
+        "final_neutral_readback": {
+            "1": 623,
+            "2": 527,
+            "3": 511,
+            "4": 491,
+            "5": 521,
+            "6": 873
+        },
+        "neutral_status": "Preliminary visually aligned reference; single final readback; payload and repeatability unverified."
     }
 }

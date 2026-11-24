@@ -54,3 +54,18 @@ Using the same controller individually, all six IDs responded: 461, 900, 916, 27
 | 6 | Base | 124 | CCW viewed above | 124–174 | 124 |
 
 Single final readback errors relative to targets (closed gripper): -7, +1, +5, +1, -6, 0; mean absolute error 3.33 units, max 7. Command ranges are not validated limits; endpoints not all independently measured. Gripper 438 was exploratory. Neutral offsets stored relative to 500 for IDs 2–6 only; no conversion implemented. No safe home trajectory, payload, repeatability or simultaneous control validation. Reference photo IMG_4463.jpeg not committed.
+
+## 2026-11-24 — Arm 3 preliminary calibration
+
+Operator manually aligned the arm before connection. All six IDs responded. Individual bidirectional tests completed in order 6, 5, 4, 3, 2, 1 using the shared controller.
+
+| ID | Joint | Reference | Increasing direction | Command range | Final readback |
+|---|---|---:|---|---|---:|
+| 1 | Gripper | 437 open / 637 closed | closes | 437–637 | 623 |
+| 2 | Wrist rotation | 526 | left (operator view) | 476–576 | 527 |
+| 3 | Wrist pitch | 509 | forward | 459–559 | 511 |
+| 4 | Elbow | 491 | backward | 441–541 | 491 |
+| 5 | Shoulder | 519 | forward | 469–569 | 521 |
+| 6 | Base | 870 | CCW viewed above | 820–920 | 873 |
+
+Final errors: -14, +1, +2, 0, +2, +3; mean absolute error 3.67 units, maximum 14. Gripper return discrepancy requires investigation; do not increase closing force to compensate. Shoulder direction differs from Arms 1 and 2. All three arms now preliminarily calibrated individually (16 active servos total). No simultaneous controller validation, safe home, validated limits, payload or repeatability tests. Photo IMG_4464.jpeg documents Arms 1 (left) and 2 (right) facing designated forward; not committed. Offsets are data only.

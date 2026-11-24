@@ -11,7 +11,7 @@ Legacy experiment folders are preserved. New diagnostics and calibration live in
 Connect only one physically labeled arm with its verified power supply. Clear its workspace and close the vendor control software before running:
 
 ```
-python robot_control/read_positions.py
+python robot_control/read_positions.py --arm arm1
 ```
 
 Record measured positions and the physical pose. Missing or failed readings are not valid calibration values. No automatic motion is enabled in the new scripts. Do not assume position 500 is a safe home pose.
