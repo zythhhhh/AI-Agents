@@ -1,0 +1,26 @@
+{
+    "arm1": {
+        "gripper_present": null,
+        "home": {},
+        "neutral": {},
+        "limits": {},
+        "direction": {},
+        "notes": "Unverified"
+    },
+    "arm2": {
+        "gripper_present": null,
+        "home": {},
+        "neutral": {},
+        "limits": {},
+        "direction": {},
+        "notes": "Unverified"
+    },
+    "arm3": {
+        "gripper_present": null,
+        "home": {},
+        "neutral": {},
+        "limits": {},
+        "direction": {},
+        "notes": "Unverified"
+    }
+}
