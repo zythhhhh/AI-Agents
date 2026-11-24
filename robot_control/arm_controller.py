@@ -1,5 +1,6 @@
 """Single-arm diagnostics; no motion on import."""
 import json
+import time
 from pathlib import Path
 import xarm
 
@@ -11,12 +12,14 @@ def load_calibration():
 def connect():
     return xarm.Controller("USB", debug=False)
 
-def read_positions(arm):
+def read_positions(arm, servos=range(1, 7)):
     positions = {}
-    for servo in range(1, 7):
+    for servo in servos:
         try:
             positions[str(servo)] = arm.getPosition(servo)
         except Exception as exc:
             positions[str(servo)] = None
             print(f"Servo {servo}: read failed: {exc}")
+        finally:
+            time.sleep(0.5)
     return positions

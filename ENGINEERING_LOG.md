@@ -12,7 +12,7 @@ Next: label arms, identify missing gripper, read positions individually, documen
 
 | Arm | Servo 1 | Servo 2 | Servo 3 | Servo 4 | Servo 5 | Servo 6 | Physical pose / notes |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| arm1 | | | | | | | |
+| arm1 | N/A | N/A | 553 | 499 | 516 | 501 | Initial readings; pose not yet verified |
 | arm2 | | | | | | | |
 | arm3 | | | | | | | |
 
@@ -23,3 +23,7 @@ Next: label arms, identify missing gripper, read positions individually, documen
 - Arm 3: smaller precision gripper, black platform. Photo IMG_4455.jpeg.
 
 Photo filenames refer to conversation uploads, not repository files. Servo communication, reference positions and limits remain to be verified.
+
+## Arm 1 communication test — 2026-11-24
+
+Reported voltage 7.753 V. Initial reads failed with list index out of range. Individual reads of IDs 3–6 with 0.5 s spacing succeeded twice, with debug enabled and disabled. Exact cause of initial failure unconfirmed. Updated read-only diagnostic requires explicit arm selection and omits voltage polling to match successful test. Updated script still needs hardware testing. Home, neutral, limits and directions remain uncalibrated.

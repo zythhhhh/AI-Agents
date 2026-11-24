@@ -5,14 +5,20 @@
         "neutral": {},
         "limits": {},
         "direction": {},
-        "notes": "No wrist rotation or gripper; teammate adjusted upright reference near 500; not measured yet.",
+        "notes": "No wrist rotation or gripper; teammate adjusted upright reference near 500. Initial readings verified; physical pose and safe home not yet validated.",
         "active_servos": [
             3,
             4,
             5,
             6
         ],
-        "reference_photo": "IMG_4453.jpeg"
+        "reference_photo": "IMG_4453.jpeg",
+        "initial_readings": {
+            "3": 553,
+            "4": 499,
+            "5": 516,
+            "6": 501
+        }
     },
     "arm2": {
         "gripper_present": true,
