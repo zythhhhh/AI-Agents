@@ -15,3 +15,11 @@ Next: label arms, identify missing gripper, read positions individually, documen
 | arm1 | | | | | | | |
 | arm2 | | | | | | | |
 | arm3 | | | | | | | |
+
+## Hardware identification
+
+- Arm 1: four reported active servos (3–6), no wrist rotation or gripper; upright reference adjusted by teammate. Photo IMG_4453.jpeg.
+- Arm 2: large serrated claw, aluminum frame. Photo IMG_4454.jpeg.
+- Arm 3: smaller precision gripper, black platform. Photo IMG_4455.jpeg.
+
+Photo filenames refer to conversation uploads, not repository files. Servo communication, reference positions and limits remain to be verified.

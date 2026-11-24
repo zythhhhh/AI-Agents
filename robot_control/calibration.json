@@ -1,26 +1,37 @@
 {
     "arm1": {
-        "gripper_present": null,
+        "gripper_present": false,
         "home": {},
         "neutral": {},
         "limits": {},
         "direction": {},
-        "notes": "Unverified"
+        "notes": "No wrist rotation or gripper; teammate adjusted upright reference near 500; not measured yet.",
+        "active_servos": [
+            3,
+            4,
+            5,
+            6
+        ],
+        "reference_photo": "IMG_4453.jpeg"
     },
     "arm2": {
-        "gripper_present": null,
+        "gripper_present": true,
         "home": {},
         "neutral": {},
         "limits": {},
         "direction": {},
-        "notes": "Unverified"
+        "notes": "Large serrated claw; mounted on aluminum frame.",
+        "active_servos": null,
+        "reference_photo": "IMG_4454.jpeg"
     },
     "arm3": {
-        "gripper_present": null,
+        "gripper_present": true,
         "home": {},
         "neutral": {},
         "limits": {},
         "direction": {},
-        "notes": "Unverified"
+        "notes": "Smaller precision gripper; black platform.",
+        "active_servos": null,
+        "reference_photo": "IMG_4455.jpeg"
     }
 }
