@@ -27,3 +27,7 @@ Photo filenames refer to conversation uploads, not repository files. Servo commu
 ## Arm 1 communication test — 2026-11-24
 
 Reported voltage 7.753 V. Initial reads failed with list index out of range. Individual reads of IDs 3–6 with 0.5 s spacing succeeded twice, with debug enabled and disabled. Exact cause of initial failure unconfirmed. Updated read-only diagnostic requires explicit arm selection and omits voltage polling to match successful test. Updated script still needs hardware testing. Home, neutral, limits and directions remain uncalibrated.
+
+## Arm 1 initial motion tests
+
+Updated diagnostic succeeded: 3=553, 4=499, 5=517, 6=501. Operator confirmed unchanged upright reference pose. Each servo was individually commanded +20 units over 2000 ms, then back to reference. All returned visually. Increasing ID 6 rotated base counterclockwise, ID 5 tilted forward (operator reported), ID 4 moved toward operator, ID 3 away. Joint mappings except base and robot-frame directions remain provisional. Final position readback pending. No safe limits or home trajectory established.

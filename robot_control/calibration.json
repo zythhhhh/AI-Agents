@@ -5,7 +5,7 @@
         "neutral": {},
         "limits": {},
         "direction": {},
-        "notes": "No wrist rotation or gripper; teammate adjusted upright reference near 500. Initial readings verified; physical pose and safe home not yet validated.",
+        "notes": "No wrist rotation or gripper; teammate adjusted upright reference near 500. Initial readings verified; physical pose and safe home not yet validated. Updated diagnostic validated. All four active servos passed small bidirectional movement tests; return verified visually only. Joint mapping except base and robot-frame directions remain provisional.",
         "active_servos": [
             3,
             4,
@@ -18,6 +18,34 @@
             "4": 499,
             "5": 516,
             "6": 501
+        },
+        "reference_positions": {
+            "3": 553,
+            "4": 499,
+            "5": 517,
+            "6": 501
+        },
+        "movement_tests": {
+            "3": {
+                "target": 573,
+                "increasing": "away from operator",
+                "return_visual": true
+            },
+            "4": {
+                "target": 519,
+                "increasing": "toward operator",
+                "return_visual": true
+            },
+            "5": {
+                "target": 537,
+                "increasing": "forward (operator reported)",
+                "return_visual": true
+            },
+            "6": {
+                "target": 521,
+                "increasing": "counterclockwise viewed from above",
+                "return_visual": true
+            }
         }
     },
     "arm2": {
