@@ -35,3 +35,7 @@ Updated diagnostic succeeded: 3=553, 4=499, 5=517, 6=501. Operator confirmed unc
 ## Arm 1 forward-facing neutral alignment
 
 Initial return readback: 554, 500, 517, 505 (IDs 3–6); absolute errors 1, 1, 0, 4. Base incrementally commanded to 875 for operator-defined forward, approximately 90 degrees counterclockwise from initial pose. Unexpected wrist/elbow shifts during base rotation remain unexplained. After visual elbow and wrist adjustments, operator confirmed alignment. Final measured neutral: 3=578, 4=513, 5=517, 6=872. Offsets relative to logical 500: +78, +13, +17, +372. These are reference data only, not implemented motion conversion. Repeatability, safe limits and home trajectory remain unverified.
+
+## Arm 1 preliminary calibration completion
+
+At operator request, shortened testing for this session only. Tested command ranges: wrist 478–678 (increasing backward), elbow 413–613 (increasing forward), shoulder 317–617 (increasing backward), base 501–875 (increasing counterclockwise). Directions refer to newly defined forward orientation. Shoulder command 467 initially failed to move; retry with debug succeeded, readback 469; cause unknown. At command 367 readback 368, other joints stable. Range endpoints generally visually confirmed, not all measured. Final neutral readback IDs 3–6: 576, 513, 517, 872; absolute errors 2, 0, 0, 0. Preliminary calibration complete. Safe limits, combined motions, payload testing and repeatability remain pending; home and limits fields remain empty.

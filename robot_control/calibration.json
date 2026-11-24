@@ -9,8 +9,13 @@
             "6": 872
         },
         "limits": {},
-        "direction": {},
-        "notes": "No wrist rotation or gripper; teammate adjusted upright reference near 500. Initial readings verified; physical pose and safe home not yet validated. Updated diagnostic validated. All four active servos passed small bidirectional movement tests; return verified visually only. Joint mapping except base and robot-frame directions remain provisional. Neutral reference now measured after visual alignment; home remains unverified.",
+        "direction": {
+            "3": "increasing backward",
+            "4": "increasing forward",
+            "5": "increasing backward",
+            "6": "increasing counterclockwise viewed from above"
+        },
+        "notes": "No wrist rotation or gripper; teammate adjusted upright reference near 500. Initial readings verified; physical pose and safe home not yet validated. Updated diagnostic validated. All four active servos passed small bidirectional movement tests; return verified visually only. Joint mapping except base and robot-frame directions remain provisional. Neutral reference now measured after visual alignment; home remains unverified. Shortened session tests completed; tested command ranges are not validated limits. Earlier observer-relative directions superseded by forward-facing directions.",
         "active_servos": [
             3,
             4,
@@ -58,7 +63,31 @@
             "5": 17,
             "6": 372
         },
-        "neutral_status": "Visually aligned, measured once after adjustments; repeatability and safe limits unverified. Forward approximately 90 degrees counterclockwise from initial orientation."
+        "neutral_status": "Visually aligned; one final return readback within 2 units. Preliminary calibration complete; safe limits and repeatability unverified.",
+        "tested_command_ranges": {
+            "3": [
+                478,
+                678
+            ],
+            "4": [
+                413,
+                613
+            ],
+            "5": [
+                317,
+                617
+            ],
+            "6": [
+                501,
+                875
+            ]
+        },
+        "final_neutral_readback": {
+            "3": 576,
+            "4": 513,
+            "5": 517,
+            "6": 872
+        }
     },
     "arm2": {
         "gripper_present": true,
