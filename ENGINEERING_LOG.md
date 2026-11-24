@@ -69,3 +69,23 @@ Operator manually aligned the arm before connection. All six IDs responded. Indi
 | 6 | Base | 870 | CCW viewed above | 820–920 | 873 |
 
 Final errors: -14, +1, +2, 0, +2, +3; mean absolute error 3.67 units, maximum 14. Gripper return discrepancy requires investigation; do not increase closing force to compensate. Shoulder direction differs from Arms 1 and 2. All three arms now preliminarily calibrated individually (16 active servos total). No simultaneous controller validation, safe home, validated limits, payload or repeatability tests. Photo IMG_4464.jpeg documents Arms 1 (left) and 2 (right) facing designated forward; not committed. Offsets are data only.
+
+## 2026-11-24 — Final session summary
+
+The student operator performed physical alignment, Python-based hardware testing and troubleshooting; AI assistance supported code and documentation. A teammate previously adjusted Arm 1's upright mechanical reference. All 16 installed servos demonstrated bidirectional movement, using one shared controller connected to each arm individually.
+
+| Reference | Arm 1 | Arm 2 | Arm 3 |
+|---|---:|---:|---:|
+| Gripper open | N/A | 288 | 437 |
+| Gripper closed | N/A | 388 | 637 |
+| Wrist rotation | N/A | 849 | 526 |
+| Wrist pitch | 578 | 510 | 509 |
+| Elbow | 513 | 498 | 491 |
+| Shoulder | 517 | 503 | 519 |
+| Base | 872 | 124 | 870 |
+
+Final photograph IMG_4465.jpeg shows Arms 1, 2 and 3 left to right in approximate forward-facing upright reference poses. IMG_4464.jpeg shows Arms 1 and 2. Photos remain outside the repository.
+
+Clarification: the earlier reported Arm 1 shoulder failure at target 467 is uncertain: terminal history shows a duplicate 517 command before the successful 467 command. Hardware failure was not established.
+
+Next session: secure mounting and inspect suspected mechanical alignment issues; investigate Arm 3 gripper return discrepancy; establish safe trajectories, limits and repeatability; implement standardized joint control with direction and offset conversion; verify independent controller addressing and simultaneous communication before coordinated motion. Subsequent work: LEGO pick-and-place, conveyor integration and Isaac Sim digital twin. Today's shortened tests are preliminary only, not authorization for autonomous operation.
