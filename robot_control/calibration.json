@@ -92,12 +92,86 @@
     "arm2": {
         "gripper_present": true,
         "home": {},
-        "neutral": {},
+        "neutral": {
+            "2": 849,
+            "3": 510,
+            "4": 498,
+            "5": 503,
+            "6": 124
+        },
         "limits": {},
-        "direction": {},
-        "notes": "Large serrated claw; mounted on aluminum frame.",
-        "active_servos": null,
-        "reference_photo": "IMG_4454.jpeg"
+        "direction": {
+            "1": "increasing closes",
+            "2": "increasing left (operator view)",
+            "3": "increasing forward",
+            "4": "increasing backward",
+            "5": "increasing backward",
+            "6": "increasing counterclockwise viewed from above"
+        },
+        "notes": "Large serrated claw, bottom jaw moves. Temporarily weighted base, not bolted; suspected screw/bracket misalignment unverified. Shared controller used individually. All six servos demonstrated bidirectional movement by operator observation. Servo 1 range includes exploratory command 438, not verified endpoint. No safe home or limits established. Photos not included.",
+        "active_servos": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+        ],
+        "reference_photo": "IMG_4463.jpeg",
+        "initial_readings": {
+            "1": 461,
+            "2": 900,
+            "3": 916,
+            "4": 278,
+            "5": 415,
+            "6": 132
+        },
+        "neutral_offsets": {
+            "2": 349,
+            "3": 10,
+            "4": -2,
+            "5": 3,
+            "6": -376
+        },
+        "gripper_positions": {
+            "open": 288,
+            "closed": 388
+        },
+        "tested_command_ranges": {
+            "1": [
+                288,
+                438
+            ],
+            "2": [
+                799,
+                899
+            ],
+            "3": [
+                460,
+                560
+            ],
+            "4": [
+                378,
+                548
+            ],
+            "5": [
+                453,
+                543
+            ],
+            "6": [
+                124,
+                174
+            ]
+        },
+        "final_neutral_readback": {
+            "1": 381,
+            "2": 850,
+            "3": 515,
+            "4": 499,
+            "5": 497,
+            "6": 124
+        },
+        "neutral_status": "Approximate visual alignment; preliminary calibration complete. Gripper closed reference separate from joint neutral. Final readback single sample; repeatability and payload unverified."
     },
     "arm3": {
         "gripper_present": true,

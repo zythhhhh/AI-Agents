@@ -39,3 +39,18 @@ Initial return readback: 554, 500, 517, 505 (IDs 3–6); absolute errors 1, 1, 0
 ## Arm 1 preliminary calibration completion
 
 At operator request, shortened testing for this session only. Tested command ranges: wrist 478–678 (increasing backward), elbow 413–613 (increasing forward), shoulder 317–617 (increasing backward), base 501–875 (increasing counterclockwise). Directions refer to newly defined forward orientation. Shoulder command 467 initially failed to move; retry with debug succeeded, readback 469; cause unknown. At command 367 readback 368, other joints stable. Range endpoints generally visually confirmed, not all measured. Final neutral readback IDs 3–6: 576, 513, 517, 872; absolute errors 2, 0, 0, 0. Preliminary calibration complete. Safe limits, combined motions, payload testing and repeatability remain pending; home and limits fields remain empty.
+
+## 2026-11-24 — Arm 2 preliminary calibration
+
+Using the same controller individually, all six IDs responded: 461, 900, 916, 278, 415, 132 (IDs 1–6). Operator performed physical alignment and shortened bidirectional tests. Shoulder initially suspected nonresponsive; terminal history showed no Arm 2 shoulder command yet, subsequent movement confirmed. Temporary weighted base and suspected screw/bracket alignment issue require inspection and secure mounting before further loaded/coordinated testing.
+
+| ID | Joint | Reference | Increasing direction | Command range | Final readback |
+|---|---|---:|---|---|---:|
+| 1 | Gripper | 288 open / 388 closed | closes | 288–438 | 381 |
+| 2 | Wrist rotation | 849 | left (operator view) | 799–899 | 850 |
+| 3 | Wrist pitch | 510 | forward | 460–560 | 515 |
+| 4 | Elbow | 498 | backward | 378–548 | 499 |
+| 5 | Shoulder | 503 | backward | 453–543 | 497 |
+| 6 | Base | 124 | CCW viewed above | 124–174 | 124 |
+
+Single final readback errors relative to targets (closed gripper): -7, +1, +5, +1, -6, 0; mean absolute error 3.33 units, max 7. Command ranges are not validated limits; endpoints not all independently measured. Gripper 438 was exploratory. Neutral offsets stored relative to 500 for IDs 2–6 only; no conversion implemented. No safe home trajectory, payload, repeatability or simultaneous control validation. Reference photo IMG_4463.jpeg not committed.
