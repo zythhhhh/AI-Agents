@@ -31,3 +31,7 @@ Reported voltage 7.753 V. Initial reads failed with list index out of range. Ind
 ## Arm 1 initial motion tests
 
 Updated diagnostic succeeded: 3=553, 4=499, 5=517, 6=501. Operator confirmed unchanged upright reference pose. Each servo was individually commanded +20 units over 2000 ms, then back to reference. All returned visually. Increasing ID 6 rotated base counterclockwise, ID 5 tilted forward (operator reported), ID 4 moved toward operator, ID 3 away. Joint mappings except base and robot-frame directions remain provisional. Final position readback pending. No safe limits or home trajectory established.
+
+## Arm 1 forward-facing neutral alignment
+
+Initial return readback: 554, 500, 517, 505 (IDs 3–6); absolute errors 1, 1, 0, 4. Base incrementally commanded to 875 for operator-defined forward, approximately 90 degrees counterclockwise from initial pose. Unexpected wrist/elbow shifts during base rotation remain unexplained. After visual elbow and wrist adjustments, operator confirmed alignment. Final measured neutral: 3=578, 4=513, 5=517, 6=872. Offsets relative to logical 500: +78, +13, +17, +372. These are reference data only, not implemented motion conversion. Repeatability, safe limits and home trajectory remain unverified.

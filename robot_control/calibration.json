@@ -2,10 +2,15 @@
     "arm1": {
         "gripper_present": false,
         "home": {},
-        "neutral": {},
+        "neutral": {
+            "3": 578,
+            "4": 513,
+            "5": 517,
+            "6": 872
+        },
         "limits": {},
         "direction": {},
-        "notes": "No wrist rotation or gripper; teammate adjusted upright reference near 500. Initial readings verified; physical pose and safe home not yet validated. Updated diagnostic validated. All four active servos passed small bidirectional movement tests; return verified visually only. Joint mapping except base and robot-frame directions remain provisional.",
+        "notes": "No wrist rotation or gripper; teammate adjusted upright reference near 500. Initial readings verified; physical pose and safe home not yet validated. Updated diagnostic validated. All four active servos passed small bidirectional movement tests; return verified visually only. Joint mapping except base and robot-frame directions remain provisional. Neutral reference now measured after visual alignment; home remains unverified.",
         "active_servos": [
             3,
             4,
@@ -46,7 +51,14 @@
                 "increasing": "counterclockwise viewed from above",
                 "return_visual": true
             }
-        }
+        },
+        "neutral_offsets": {
+            "3": 78,
+            "4": 13,
+            "5": 17,
+            "6": 372
+        },
+        "neutral_status": "Visually aligned, measured once after adjustments; repeatability and safe limits unverified. Forward approximately 90 degrees counterclockwise from initial orientation."
     },
     "arm2": {
         "gripper_present": true,
